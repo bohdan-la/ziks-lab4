@@ -54,4 +54,8 @@
 	(for-each (lambda (pair)
 		(printf "~A, ~A~N" (car pair) (exact->inexact (cdr pair))))
 	freqs)
-)
+
+	(for-each (lambda (pair)
+		(display (car pair))
+		(display " ")) freqs)
+	(newline))
