@@ -1,11 +1,10 @@
-(import utf8 utf8-case-map unicode-char-sets alist-lib)
+(import scheme (chicken base))
+(import utf8 utf8-case-map srfi-1 alist-lib args (chicken file posix) (chicken process-context) (chicken port) (chicken format) (chicken sort))
 
-(define l '())
-(alist-set! l 'aa 1)
-(when (assoc 'aa l)
-    (alist-update! l 'aa add1 (lambda () 0)))
-
-(print l)
 
 (define (main args)
-    (print args))
+
+    (define lst '(1 2 3 4 5))
+    ; (print (ch-to-sym #\vvv))
+(append! lst 2)
+    (print lst))

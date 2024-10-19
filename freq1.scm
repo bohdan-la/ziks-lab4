@@ -1,8 +1,8 @@
 (import utf8 utf8-case-map srfi-1 alist-lib args (chicken file posix) (chicken process-context) (chicken port) (chicken format) (chicken sort))
 
-(define ukrainian-alphabet '(#\а #\б #\в #\г #\ґ #\д #\е #\є #\ж #\з #\и #\і
+(define ukr-alphabet '(#\а #\б #\в #\г #\ґ #\д #\е #\є #\ж #\з #\и #\і
 	#\ї #\й #\к #\л #\м #\н #\о #\п #\р #\с #\т #\у #\ф #\х #\ц
-	#\ч #\ш #\щ #\ь #\ю #\я #\' #\space))
+	#\ч #\ш #\щ #\ь #\ю #\я))
 
 (define ch-to-sym
 	(lambda (ch)
@@ -26,8 +26,9 @@
 			(loop (read-char))))))
 	occur)
 
+
 (define (main args)
-	(set! ukrainian-alphabet (map ch-to-sym ukrainian-alphabet))
+	(define ukr-alphabet-sym (map ch-to-sym ukr-alphabet))
 	(define occur '())
 
 	; підрахунок кількості появи символів усів заданих файлів
@@ -42,20 +43,27 @@
 	(define freqs (alist-copy occur))
 	(map (lambda (pair) (set-cdr! pair (/ (cdr pair) all_symbols))) freqs)
 
-	; сортування в алфавітному порядку
-	(set! freqs (sort! freqs (lambda (a b)
-		(char<? (sym-to-ch (car a)) (sym-to-ch (car b))))))
+	; сортування за алфавітним порядком
+	; (define freqs-alpha-order '())
+	; (for-each (lambda (letter)
+	; 	(let ((pair (assq letter freqs)))
+	; 		(when pair
+	; 		(set! freqs-alpha-order (append freqs-alpha-order (list pair))))))
+	; 	ukr-alphabet-sym)
+	; (set! freqs freqs-alpha-order)
 
 	; сортування за спаданням ймовірності
 	; (set! freqs (sort freqs (lambda (a b)
 	; 	(> (cdr a) (cdr b)))))
 
 	; вивід пар символ-ймовірність у csv форматі
-	(for-each (lambda (pair)
-		(printf "~A, ~A~N" (car pair) (exact->inexact (cdr pair))))
-	freqs)
+	; (for-each (lambda (pair)
+	; 	(printf "~A, ~A~N" (car pair) (exact->inexact (cdr pair))))
+	; 	freqs)
 
-	(for-each (lambda (pair)
-		(display (car pair))
-		(display " ")) freqs)
-	(newline))
+	; ; послідовність літер по мірі спадання частоти появи
+	; (for-each (lambda (pair)
+	; 	(display (car pair))
+	; 	(display " ")) freqs)
+	; (newline)
+)
