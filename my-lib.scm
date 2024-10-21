@@ -29,13 +29,13 @@
 			(loop (read-char))))))
 	occur)
 
-; ;; функція для знаходження індексу елемента у списку
+; ; функція для знаходження індексу елемента у списку
 ; (define (list-index pred lst)
 ; 	(let loop ((lst lst) (i 0))
 ; 	(cond
-; 		((null? lst) #f) ;; Якщо елемент не знайдено
-; 		((pred (car lst)) i) ;; Якщо знайдено елемент
-; 		(else (loop (cdr lst) (+ i 1)))))) ;; Продовжуємо пошук
+; 		((null? lst) #f) ; якщо елемент не знайдено
+; 		((pred (car lst)) i) ; якщо знайдено елемент
+; 		(else (loop (cdr lst) (+ i 1)))))) ; продовжуємо пошук
 
 (define (true-ukr-alphabet-order? ch1 ch2)
     (let ((index1 (list-index (lambda (x) (char=? x ch1)) ukr-alphabet))

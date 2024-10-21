@@ -1,10 +1,10 @@
 (import utf8 utf8-case-map srfi-1 alist-lib args (chicken file posix) (chicken process-context) (chicken port) (chicken format) (chicken sort))
 
-;; знижує регістр символа
+; знижує регістр символа
 (define (ch-to-lower ch)
 	(string-ref (utf8-string-downcase (string ch)) 0))
 
-;; функція для підрахунку триграм у файлі
+; функція для підрахунку триграм у файлі
 (define (add-file-trigram-occur file occur)
 	(with-input-from-file file
 		(lambda ()
