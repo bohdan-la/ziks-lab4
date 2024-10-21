@@ -14,11 +14,12 @@
 
 	(with-input-from-file file-in
 		(lambda ()
-			(let loop ((ch (read-char)))
+			(let loop ((prev-ch (read-char)) (ch (read-char)))
 				(unless (eof-object? ch)
-				(when (memq ch allowed-letters)
-					(write-char ch file-out))
-					; (print ch))
-			(loop (read-char))))))
+					(if (and (eq? ch #\newline) (not (eq? prev-ch #\space))) (set! ch #\space))
+					(when (memq ch allowed-letters)
+						(write-char ch file-out))
+						; (display ch))
+			(loop ch (read-char))))))
 	(close-output-port file-out)
 )
