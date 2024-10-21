@@ -53,17 +53,17 @@
 	; (set! freqs freqs-alpha-order)
 
 	; сортування за спаданням ймовірності
-	; (set! freqs (sort freqs (lambda (a b)
-	; 	(> (cdr a) (cdr b)))))
+	(set! freqs (sort freqs (lambda (a b)
+		(> (cdr a) (cdr b)))))
 
 	; вивід пар символ-ймовірність у csv форматі
-	; (for-each (lambda (pair)
-	; 	(printf "~A, ~A~N" (car pair) (exact->inexact (cdr pair))))
-	; 	freqs)
+	(for-each (lambda (pair)
+		(printf "~A, ~A~N" (car pair) (exact->inexact (cdr pair))))
+		freqs)
 
 	; ; послідовність літер по мірі спадання частоти появи
-	; (for-each (lambda (pair)
-	; 	(display (car pair))
-	; 	(display " ")) freqs)
-	; (newline)
+	(for-each (lambda (pair)
+		(display (car pair))
+		(display " ")) freqs)
+	(newline)
 )
