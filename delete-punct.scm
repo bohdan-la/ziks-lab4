@@ -1,4 +1,4 @@
-(import utf8)
+(import utf8 utf8-case-map)
 
 (define allowed-letters '(#\а #\б #\в #\г #\ґ #\д #\е #\є #\ж #\з #\и #\і #\ї #\й
 	#\к #\л #\м #\н #\о #\п #\р #\с #\т #\у #\ф #\х #\ц #\ч
@@ -7,19 +7,22 @@
 	#\К #\Л #\М #\Н #\О #\П #\Р #\С #\Т #\У #\Ф #\Х #\Ц #\Ч
 	#\Ш #\Щ #\Ь #\Ю #\Я))
 
+(define (ch-to-lower ch)
+	(string-ref (utf8-string-downcase (string ch)) 0))
+
+
 (define (main args)
 	(define file-in (car args))
-	; (define file-out (open-output-file "result.txt"))
-	(define file-out (open-output-file (cadr args)))
 
 	(with-input-from-file file-in
 		(lambda ()
-			(let loop ((prev-ch (read-char)) (ch (read-char)))
+			(let ((prev-ch 'nil))
+			(let loop ((ch (read-char)))
 				(unless (eof-object? ch)
-					(if (and (eq? ch #\newline) (not (eq? prev-ch #\space))) (set! ch #\space))
+					(when (eq? ch #\newline) (set! ch #\space))
 					(when (memq ch allowed-letters)
-						(write-char ch file-out))
-						; (display ch))
-			(loop ch (read-char))))))
-	(close-output-port file-out)
+						(when (not (and (eq? prev-ch #\space) (eq? ch #\space)))
+							(display (ch-to-lower ch)))
+							(set! prev-ch ch))
+			(loop (read-char)))))))
 )
