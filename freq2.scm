@@ -1,18 +1,5 @@
 (import utf8 utf8-case-map srfi-1 alist-lib args (chicken file posix) (chicken process-context) (chicken port) (chicken format) (chicken sort))
 
-(define ukr-alphabet '(#\а #\б #\в #\г #\ґ #\д #\е #\є #\ж #\з #\и #\і
-	#\ї #\й #\к #\л #\м #\н #\о #\п #\р #\с #\т #\у #\ф #\х #\ц
-	#\ч #\ш #\щ #\ь #\ю #\я))
-
-;; перетворює символ у символ типу symbol
-(define ch-to-sym
-	(lambda (ch)
-		(string->symbol (string ch))))
-
-;; перетворює символ типу symbol у character
-(define (sym-to-ch sym)
-	(string-ref (symbol->string sym) 0))
-
 ;; знижує регістр символа
 (define (ch-to-lower ch)
 	(string-ref (utf8-string-downcase (string ch)) 0))
