@@ -62,8 +62,8 @@
 		freqs)
 
 	; ; послідовність літер по мірі спадання частоти появи
-	(for-each (lambda (pair)
-		(display (car pair))
-		(display " ")) freqs)
-	(newline)
+	; (for-each (lambda (pair)
+	; 	(display (car pair))
+	; 	(display " ")) freqs)
+	; (newline)
 )

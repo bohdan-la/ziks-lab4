@@ -41,22 +41,22 @@
 	(set! freqs (sort freqs (lambda (a b) (> (cdr a) (cdr b)))))
 
 	; виведення пар біграма-ймовірність у форматі CSV
-	; (for-each (lambda (pair)
-	; 	(printf "~A, ~A~N" (car pair) (exact->inexact (cdr pair))))
-	; 	freqs)
+	(for-each (lambda (pair)
+		(printf "~A, ~A~N" (car pair) (exact->inexact (cdr pair))))
+		freqs)
 
 	; виведення 30 найбільш ймовірних біграм
-	(define freqs-30 '())
-	(let loop ((freqs freqs) (i 0))
-		(when (and (not (null? freqs)) (< i 30))
-			(let ((pair (car freqs)))
-				(printf "~A, ~A~N" (car pair) (exact->inexact (cdr pair)))
-				(set! freqs-30 (append freqs-30 (list (caar freqs)))))
-			(loop (cdr freqs) (+ i 1))))
-	(for-each (lambda (bigram)
-		(printf "\"~A\" " bigram))
-		freqs-30)
-	(newline)
+	; (define freqs-30 '())
+	; (let loop ((freqs freqs) (i 0))
+	; 	(when (and (not (null? freqs)) (< i 30))
+	; 		(let ((pair (car freqs)))
+	; 			(printf "~A, ~A~N" (car pair) (exact->inexact (cdr pair)))
+	; 			(set! freqs-30 (append freqs-30 (list (caar freqs)))))
+	; 		(loop (cdr freqs) (+ i 1))))
+	; (for-each (lambda (bigram)
+	; 	(printf "\"~A\" " bigram))
+	; 	freqs-30)
+	; (newline)
 
 	; виведення біграм для перевірки
 	; (for-each (lambda (pair)
