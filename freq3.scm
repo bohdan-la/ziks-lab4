@@ -41,7 +41,7 @@
 	;; сортування за спаданням ймовірності
 	(set! freqs (sort freqs (lambda (a b) (> (cdr a) (cdr b)))))
 
-    ;; виведення пар біграма-ймовірність у форматі CSV
+    ;; виведення пар триграма-ймовірність у форматі csv
 	(for-each (lambda (pair)
 		(printf "~A, ~A~N" (car pair) (exact->inexact (cdr pair))))
 		freqs)

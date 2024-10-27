@@ -57,9 +57,18 @@
 		(> (cdr a) (cdr b)))))
 
 	; вивід пар символ-ймовірність у csv форматі
+	; (for-each (lambda (pair)
+	; 	(printf "~A, ~A~N" (car pair) (exact->inexact (cdr pair))))
+	; 	freqs)
+
+	; сортування за спаданням ймовірності
+	(set! occur (sort occur (lambda (a b)
+		(> (cdr a) (cdr b)))))
+
+	; вивід пар символ-частота появи у csv форматі
 	(for-each (lambda (pair)
-		(printf "~A, ~A~N" (car pair) (exact->inexact (cdr pair))))
-		freqs)
+		(printf "~A, ~A~N" (car pair) (cdr pair)))
+		occur)
 
 	; ; послідовність літер по мірі спадання частоти появи
 	; (for-each (lambda (pair)

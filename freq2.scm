@@ -38,12 +38,21 @@
 	(map (lambda (pair) (set-cdr! pair (/ (cdr pair) all_bigrams))) freqs)
 
 	; сортування за спаданням ймовірності (закоментовано для прикладу)
-	(set! freqs (sort freqs (lambda (a b) (> (cdr a) (cdr b)))))
+	; (set! freqs (sort freqs (lambda (a b) (> (cdr a) (cdr b)))))
 
-	; виведення пар біграма-ймовірність у форматі CSV
+	; виведення пар біграма-ймовірність у форматі csv
+	; (for-each (lambda (pair)
+	; 	(printf "~A, ~A~N" (car pair) (exact->inexact (cdr pair))))
+	; 	freqs)
+
+	; сортування за спаданням ймовірності
+	(set! occur (sort occur (lambda (a b)
+		(> (cdr a) (cdr b)))))
+
+	; вивід пар символ-частота появи у csv форматі
 	(for-each (lambda (pair)
-		(printf "~A, ~A~N" (car pair) (exact->inexact (cdr pair))))
-		freqs)
+		(printf "~A, ~A~N" (car pair) (cdr pair)))
+		occur)
 
 	; виведення 30 найбільш ймовірних біграм
 	; (define freqs-30 '())

@@ -16,14 +16,14 @@
 		(else (loop (cdr lst) (+ i 1)))))) ; продовжуємо пошук
 
 (define (main args)
-	(define a 7)
-	(define b 13)
+	(define a 2)
+	(define b 25)
 	(define file-in (car args))
 
 	(define letters-cypher (map (lambda (lett) 
 		(list-ref letters 
-			(modulo (+ (* a (list-index (lambda (x) 
-							(eq? x lett)) letters)) b) 33)))
+			(modulo (* (- (list-index (lambda (x) 
+							(eq? x lett)) letters) b) a) 33)))
 				letters))
 
 	(with-input-from-file file-in
@@ -35,4 +35,5 @@
 						(display (list-ref letters-cypher (list-index (lambda (x) (eq? x ch)) letters)))
 						(display ch))
 			(loop (read-char))))))
+	(newline)
 )
